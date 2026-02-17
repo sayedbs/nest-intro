@@ -1,0 +1,23 @@
+
+
+# Get all users
+GET http://localhost:3100/users
+
+
+
+###
+GET http://localhost:3100/users/90875
+
+###
+GET http://localhost:3100/users/12345?userName=Sayed&age=30
+
+
+### 
+# Post request to create a new user
+POST http://localhost:3100/users
+Content-Type: application/json
+
+{
+    "userName": "Sayed",
+    "age": 130
+}

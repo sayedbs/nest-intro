@@ -1,0 +1,6 @@
+
+
+# Basic REST API with NestJS
+GET http://localhost:3100
+
+
