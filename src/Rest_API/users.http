@@ -5,6 +5,8 @@ GET http://localhost:3100/users
 
 ###
 GET http://localhost:3100/users/123
+?limit=10
+&page=20
 
 ### 
 # Post request to create a new user
@@ -12,8 +14,10 @@ POST http://localhost:3100/users
 Content-Type: application/json
 
 {
-    "userName": "Sayed",
-    "email": "example@mail.com"  
+    "name": "Sayed",
+    "surname": "Hossain",
+    "email": "example@mail.com",
+    "password": "Abc#bd23"
 }
 
 ### 
