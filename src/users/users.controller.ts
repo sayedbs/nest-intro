@@ -1,31 +1,34 @@
-import { Controller, Get, Post, Put, Patch, Delete, Param, Query, Req, Header, Headers, Ip, ParseIntPipe, DefaultValuePipe } from '@nestjs/common';
-
+import { Controller, Get, Post, Put, Patch, Delete, Param, Query, Req, Header, Headers, Ip, ParseIntPipe, DefaultValuePipe, Body, ValidationPipe } from '@nestjs/common';
+import { CreateUserDto } from './dtos/createUserDto.dto';
+import { GetUserParmsDto } from './dtos/getUser.dto';
 @Controller('users')
 export class UsersController {
     @Get()
     findAll(
-        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: Number, 
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: Number
-    ) {
+        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number, 
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number
+    ): string {
         console.log(typeof limit, limit);
         console.log(typeof page, page);
-
         return 'This action returns all users';
     }
 
     @Get('/:id')
-    findOne(@Param('id') id: any, @Query() query: any): string {
-        console.log(id, query);
-        return `This action returns a ${id} user`;
+    findOne(
+        @Param() GetUserParmsDto: GetUserParmsDto,
+        @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number, 
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number
+    ): string {
+        console.log(typeof limit, limit);
+        console.log(typeof page, page);
+        return `This action returns a ${GetUserParmsDto} user`;
     }
 
     @Post()
     createUser(
-        @Req() request: any,
-        @Headers() headers: any,
-        @Ip() ip: string
+        @Body(new ValidationPipe()) createUserDto: CreateUserDto,
     ): string {
-        console.log(request.body, headers, ip);
+        console.log(createUserDto instanceof CreateUserDto);
         return 'This action adds a new user';
     }
 }
